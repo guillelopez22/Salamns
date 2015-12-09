@@ -5,8 +5,11 @@
  */
 package Windows;
 
+import Classes.Producto;
+import Classes.ThreadCocina;
 import static Windows.MainWindow.all_products;
-import static Windows.MainWindow.bodega;
+import static Windows.MainWindow.ordenes;
+import java.util.Stack;
 import javax.swing.JProgressBar;
 
 /**
@@ -21,6 +24,16 @@ public class Cocina extends javax.swing.JFrame {
 
     public Cocina() {
         initComponents();
+        Stack<Producto> temp = all_products;
+        Producto[] temp1 = new Producto[all_products.size()];
+        int cont = 0;
+        while(!temp.isEmpty()){
+            temp1[cont] = temp.pop();
+        }
+        for (int i = temp1.length-1; i > 0; i--) {
+            ordenes.add(temp1[i]);
+        }
+        
         
     }
 
@@ -188,8 +201,8 @@ public class Cocina extends javax.swing.JFrame {
     private void cocinero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cocinero1ActionPerformed
         // TODO add your handling code here:
         if (cocinero1.isSelected()) {
-            jProgressBar1 = new JProgressBar(0, all_products.peek().getPrep_time());
-            
+            //jProgressBar1 = new JProgressBar(0, ordenes.peek().getPrep_time());
+            new Thread(new ThreadCocina(ordenes.poll(),MainWindow.bodega,jProgressBar1)).start();
             
         }
     }//GEN-LAST:event_cocinero1ActionPerformed

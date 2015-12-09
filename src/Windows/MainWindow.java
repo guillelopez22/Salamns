@@ -15,6 +15,8 @@ import static Windows.Agregar_Producto.cb_ingredientes;
 import static Windows.Eliminar_Producto.cb_productos;
 import static Windows.Modificar_Producto.cb_ingredientes1;
 import static Windows.Modificar_Producto.cb_modProd;
+import static Windows.Rutas.cb_destiny;
+import static Windows.Rutas.cb_origin;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
@@ -23,6 +25,8 @@ import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -54,6 +58,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -83,6 +88,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem7);
+
+        jMenuItem9.setText("Rutas");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
 
         jMenuBar1.add(jMenu1);
 
@@ -285,6 +298,19 @@ public class MainWindow extends javax.swing.JFrame {
         cocina.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        Rutas r = new Rutas();
+        r.setVisible(true);
+        r.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (int i = 0; i < destinos.size(); i++) {
+            model.addElement(destinos.get(i));
+        }
+        cb_origin.setModel(model);
+        cb_destiny.setModel(model);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,11 +360,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Destino, Conexion_Destinos>();
     public static ArrayList<Ingrediente> all_ingredients = new ArrayList();
     public static ArrayList<Stack<Ingrediente>> bodega = new ArrayList();
     public static Stack<Producto> all_products = new Stack();
+    public static Queue<Producto> ordenes = new LinkedList();
     public static ArrayList<Destino> destinos = new ArrayList();
     public static ArrayList<Conexion_Destinos> conexiones = new ArrayList();
 }

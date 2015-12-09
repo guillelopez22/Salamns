@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 
-public class Cocina implements Runnable {
+public class ThreadCocina implements Runnable {
 
     int prep_time;
     ArrayList ingredientes;
@@ -19,7 +19,7 @@ public class Cocina implements Runnable {
     JProgressBar barra= new JProgressBar();
     int current_time=1;
 
-    public Cocina(Producto producto, ArrayList<Stack<Ingrediente>> bodega,JProgressBar barra) {
+    public ThreadCocina(Producto producto, ArrayList<Stack<Ingrediente>> bodega,JProgressBar barra) {
         this.prep_time = producto.getPrep_time();
         this.ingredientes = producto.getIngredientes();
         this.bodega = bodega;
